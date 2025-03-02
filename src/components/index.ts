@@ -1,2 +1,2 @@
 export { TrackingCircle } from "./TrackingCircle";
-export { DiamondShape } from "./DiamondShape";
+export { Indicators } from "./Indicators";
