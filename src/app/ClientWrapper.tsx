@@ -7,13 +7,20 @@ import dynamic from "next/dynamic";
 //   ssr: false,
 // });
 
-const IndicatorsScene = dynamic(
-  () => import("@/components/scenes/IndicatorsScene"),
+// const IndicatorsScene = dynamic(
+//   () => import("@/components/scenes/IndicatorsScene"),
+//   {
+//     ssr: false,
+//   }
+// );
+
+const RadialGridScene = dynamic(
+  () => import("@/components/scenes/RadialGridScene"),
   {
     ssr: false,
   }
 );
 
 export default function ClientWrapper() {
-  return <IndicatorsScene />;
+  return <RadialGridScene />;
 }
