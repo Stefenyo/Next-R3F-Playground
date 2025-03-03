@@ -37,15 +37,6 @@ npm run dev
 
 3. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
-## Components
-
-- `TrackingCircle`: A component that renders a single circle with blurred edges using a custom GLSL shader and allows subtle mouse tracking.
-  The shader uses the `smoothstep` function to create a smooth transition between the circle's edge and the background, creating the blurred effect.
-
-## Components/scenes
-
-- `CirclesScene`: Uses the `TrackingCircle` component to create a scene that renders two blurred circles with different `trackingIntensity`.
-
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
