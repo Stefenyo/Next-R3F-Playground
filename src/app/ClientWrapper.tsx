@@ -1,26 +1,48 @@
 "use client";
+import * as Scenes from "@/components/scenes";
+import { Select, Theme } from "@radix-ui/themes";
 
-import dynamic from "next/dynamic";
+import "@radix-ui/themes/styles.css";
+import { useState } from "react";
 
-// Use dynamic import with no SSR for the Three.js component
-// const CirclesScene = dynamic(() => import("@/components/scenes/CirclesScene"), {
-//   ssr: false,
-// });
-
-// const IndicatorsScene = dynamic(
-//   () => import("@/components/scenes/IndicatorsScene"),
-//   {
-//     ssr: false,
-//   }
-// );
-
-const RadialGridScene = dynamic(
-  () => import("@/components/scenes/RadialGridScene"),
-  {
-    ssr: false,
-  }
-);
+const scenes = {
+  circle: <Scenes.CirclesScene />,
+  indicator: <Scenes.IndicatorsScene />,
+  radialGridRotate: <Scenes.RadialGridRotateScene />,
+  radialGridMouse: <Scenes.RadialGridMouseScene />,
+} as const;
 
 export default function ClientWrapper() {
-  return <RadialGridScene />;
+  const [scene, setScene] = useState<keyof typeof scenes>("circle");
+
+  const handleSceneChange = (value: keyof typeof scenes) => setScene(value);
+
+  const renderListItems = () => {
+    return Object.keys(scenes).map((scene) => (
+      <Select.Item key={scene} value={scene}>
+        {scene}
+      </Select.Item>
+    ));
+  };
+
+  return (
+    <Theme hasBackground={false}>
+      <Select.Root defaultValue={scene} onValueChange={handleSceneChange}>
+        <Select.Trigger />
+        <Select.Content>{renderListItems()}</Select.Content>
+      </Select.Root>
+      <div
+        style={{
+          width: "100vw",
+          height: "100vh",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          zIndex: "-1",
+        }}
+      >
+        {scenes[scene]}
+      </div>
+    </Theme>
+  );
 }
